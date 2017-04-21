@@ -1,7 +1,7 @@
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 
-function jump {
+function j {
   # check for fzf installed
   if ! type fzf >/dev/null; then
     echo "couldn't find fzf installation" >&2
@@ -52,16 +52,16 @@ function jump {
 }
 
 #enhanced cd
-function jump::cd {
+function j::cd {
   if [ "$1" = ':' ]; then #  historyfolder selection
     shift
-    jump $@
+    j $@
   elif [ "$1" = '...' ]; then # parent folder selection
     shift
-    jump .. $@
+    j .. $@
   elif [ "$1" = '.' ]; then # subfolder selection
     shift
-    jump . $@
+    j . $@
   else
     builtin cd $@ >/dev/null # suppress stdout
   fi
