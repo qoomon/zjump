@@ -16,7 +16,7 @@
 ### as cd replacement
 
 add following to your '$HOME/.zshrc'
-alias cd='jump::cd'
+alias cd='j::cd'
 
 | cmd     |                                |
 |---      |---                             |
