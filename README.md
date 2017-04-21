@@ -4,7 +4,7 @@
 
 * [fzf](https://github.com/junegunn/fzf)
 
-## ussage
+## usage
 
 | cmd    |                                |
 |---     |---                             |
@@ -13,7 +13,7 @@
 | `j .`  | select from sub directories    |
 
 
-## as cd replacement
+### as cd replacement
 
 add following to your '$HOME/.zshrc'
 alias cd='jump::cd'
