@@ -1,6 +1,7 @@
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 
+type compdef >/dev/null && compdef _cd j # set default completion
 function j {
   # check for fzf installed
   if ! type fzf >/dev/null; then
