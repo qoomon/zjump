@@ -1,5 +1,9 @@
-autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+autoload -Uz chpwd_recent_dirs cdr
+autoload -U add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
+
+zstyle ':chpwd:*' recent-dirs-file ${ZDOTDIR:-$HOME}/.chpwd-recent-dirs
+zstyle ':chpwd:*' recent-dirs-max 1024
 
 type compdef >/dev/null && compdef _cd j # set default completion
 function j {
