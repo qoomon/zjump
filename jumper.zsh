@@ -56,7 +56,7 @@ function j {
       local dir_query=$@
       
       local dir
-      dir=$((for entry (${(f)"$(cdr -l)"}) echo ${${=entry}[@]:1}) | fzf  --height 10 --reverse  --prompt='  ' --query "$dir_query" --exact --select-1 --exit-0) \
+      dir=$((for entry (${(f)"$(cdr -l)"}) echo ${${${=entry}[@]:1}/#'~'/$HOME}) | fzf  --height 10 --reverse  --prompt='  ' --query "$dir_query" --exact --select-1 --exit-0) \
         && dir=${dir/#'~'/$HOME}
       if [[ $status == 1 ]]; then
         echo "no directory matches" >&2
