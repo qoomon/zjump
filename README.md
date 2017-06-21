@@ -2,7 +2,7 @@
 
 ## requirements
 
-* [fzf](https://github.com/junegunn/fzf)
+* Installed [fzf](https://github.com/junegunn/fzf)
 
 ## usage
 
