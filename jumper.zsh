@@ -25,7 +25,8 @@ function j {
       done
       
       local pwd_index
-      pwd_index=$(echo ${(F)indexed_pwd_list} | fzf --tac --height 10 --reverse --prompt='  ' --query "$dir_query" --exact --select-1 --exit-0 --with-nth=2..) \
+      zle && zle kill-buffer && zle -R
+      pwd_index=$(echo ${(F)indexed_pwd_list} | fzf --tac --height 10 --reverse --query "$dir_query" --exact --select-1 --exit-0 --with-nth=2..) \
         && pwd_index=${${=pwd_index}[@]:0:1}
       if [[ $status == 1 ]]; then
         echo "no directory matches" >&2
@@ -42,7 +43,7 @@ function j {
       local dir_query=$@
       
       local dir
-      dir=$(find . -mindepth 1 -type d 2>&1 | grep -v 'find:.*Permission denied' | sed 's|^\./\(.*\)|\1|' | fzf --tac --height 10 --reverse --prompt='  ' --query "$dir_query" --exact --select-1 --exit-0)
+      dir=$(find . -mindepth 1 -type d 2>&1 | grep -v 'find:.*Permission denied' | sed 's|^\./\(.*\)|\1|' | fzf --tac --height 10 --reverse --query "$dir_query" --exact --select-1 --exit-0)
       if [[ $status == 1 ]]; then
         echo "no directory matches" >&2
         return 1
@@ -56,7 +57,7 @@ function j {
       local dir_query=$@
       
       local dir
-      dir=$((for entry (${(f)"$(cdr -l)"}) echo ${${${=entry}[@]:1}/#'~'/$HOME}) | fzf  --height 10 --reverse  --prompt='  ' --query "$dir_query" --exact --select-1 --exit-0) \
+      dir=$((for entry (${(f)"$(cdr -l)"}) echo ${${${=entry}[@]:1}/#'~'/$HOME}) | fzf  --height 10 --reverse --query "$dir_query" --exact --select-1 --exit-0) \
         && dir=${dir/#'~'/$HOME}
       if [[ $status == 1 ]]; then
         echo "no directory matches" >&2
