@@ -69,6 +69,7 @@ function j {
       builtin cd $dir
       ;;
   esac
-  
-  
 }
+
+# disable completion for j
+compdef ' ' j
