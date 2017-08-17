@@ -71,5 +71,3 @@ function j {
   esac
 }
 
-# disable completion for j
-compdef ' ' j
