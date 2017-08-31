@@ -71,3 +71,5 @@ function j {
   esac
 }
 
+compctl _no_completion j # diable completion
+
