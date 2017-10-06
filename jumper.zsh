@@ -5,8 +5,6 @@ add-zsh-hook chpwd chpwd_recent_dirs
 zstyle ':chpwd:*' recent-dirs-file ${ZDOTDIR:-$HOME}/.chpwd-recent-dirs
 zstyle ':chpwd:*' recent-dirs-max 1024
 
-# TODO cancel on ctr+c
-
 function j {
   # check for fzf installed
   if ! type fzf >/dev/null; then
@@ -56,7 +54,7 @@ function j {
       dir=$(find . -mindepth 1 -type d 2>&1 \
           | grep -v 'find:.*Permission denied' \
           | sed 's|^\./\(.*\)|\1|' \
-          | fzf --tac --height 10 --reverse --no-sort --query "$dir_query" --exact --select-1 --exit-0)
+          | fzf --tac --height 10 --reverse --query "$dir_query" --exact --select-1 --exit-0)
       return_code=$status
       if [[ $return_code == 1 ]]; then
         echo "no match" >&2
@@ -72,7 +70,7 @@ function j {
       
       local dir
       dir=$( cdr -l | sed 's|^[^ ]* *||' | sed 's|\\\(.\)|\1|g' | sed "s|^~|$HOME|" \
-          | fzf --height 10 --reverse --no-sort --query "$dir_query" --exact --select-1 --exit-0)
+          | fzf --height 10 --reverse --query "$dir_query" --exact --select-1 --exit-0)
       return_code=$status
       if [[ $return_code == 1 ]]; then
         echo "no match" >&2
