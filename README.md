@@ -1,17 +1,6 @@
 # zjump
 
-## requirements
 
-* Installed [fzf](https://github.com/junegunn/fzf)
-
-## install
-### [zgem](https://github.com/qoomon/zgem)
-```zgem bundle 'https://github.com/qoomon/zjump.git' from:'git' use:'zjump.zsh'```
-### manually
-```
-git clone https://github.com/qoomon/zjump.git
-source zjump/zjump.zsh
-```
 
 
 ## usage
@@ -21,3 +10,35 @@ source zjump/zjump.zsh
 | `j`    | select from directory history  |
 | `j ..` | select from parent directories |
 | `j .`  | select from sub directories    |
+
+
+## install
+### requirements
+* Installed [fzf](https://github.com/junegunn/fzf)
+
+### [zgem](https://github.com/qoomon/zgem)
+`zgem bundle 'https://github.com/qoomon/zjump.git' from:'git' use:'zjump.zsh'`
+### [zplug](https://github.com/zdharma/zplugin)
+`zplug qoomon/zjump`
+### [zgen](https://github.com/tarjoilija/zgen)
+```
+zgen load qoomon/zjump
+zgen save
+```
+### [Antigen](https://github.com/zsh-users/antigen)
+```
+antigen bundle qoomon/zjump
+antigen apply
+```
+### [Oh My ZSH! custom plugin](http://ohmyz.sh/)
+```
+git clone https://github.com/qoomon/zjump $ZSH_CUSTOM/plugins/zjump
+plugins+=(k)
+```
+### [zplug](https://github.com/zplug/zplug)
+`zplug "qoomon/zjump"`
+### manually
+```
+git clone https://github.com/qoomon/zjump.git
+source zjump/zjump.zsh
+```
