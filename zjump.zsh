@@ -11,7 +11,6 @@ if ! type fzf >/dev/null; then
   echo "[zjump]: please install fzf in order to use zjump" >&2
 fi
 
-alias j=zjump
 function zjump {
   # check for fzf installed
   if ! type fzf >/dev/null; then
@@ -90,3 +89,7 @@ function zjump {
       ;;
   esac
 }
+
+compctl -U -K _no_completion zjump
+
+alias j=zjump
