@@ -7,9 +7,9 @@
 
 | cmd    |                                |
 |---     |---                             |
-| `j`    | select from directory history  |
-| `j ..` | select from parent directories |
-| `j .`  | select from sub directories    |
+| `j [query]`    | select from directory history  |
+| `j .. [query]` | select from parent directories |
+| `j . [query]`  | select from sub directories    |
 
 
 ## install
