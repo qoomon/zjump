@@ -1,5 +1,6 @@
 # zjump
 
+![zjump](zjump.gif)
 
 ## usage
 
