@@ -1,15 +1,15 @@
 # zjump
 
 
-
-
 ## usage
 
-| cmd    |                                |
-|---     |---                             |
-| `j [query]`    | select from directory history  |
-| `j .. [query]` | select from parent directories |
-| `j . [query]`  | select from sub directories    |
+| cmd    |                                                      |
+|---     |---                                                   |
+| `j [query]`    | select from directory history                |
+| `j .. [query]` | select from parent directories               |
+| `j . [query]`  | select from sub directories                  |
+| `j --purge`    | remove non-existing directories from history |
+
 
 
 ## install
