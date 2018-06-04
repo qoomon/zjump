@@ -13,8 +13,8 @@
 
 
 
-## install
-### requirements
+## Install
+### Requirements
 * Installed [fzf](https://github.com/junegunn/fzf)
 
 ### [zgem](https://github.com/qoomon/zgem)
