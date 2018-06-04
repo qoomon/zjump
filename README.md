@@ -2,7 +2,7 @@
 
 ![zjump](zjump.gif)
 
-## usage
+## Usage
 
 | cmd    |                                                      |
 |---     |---                                                   |
