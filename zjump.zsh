@@ -20,7 +20,14 @@ function zjump {
   
   local cmd="$1"
   case "$cmd" in
-    '--purge') # remove all not existing directories from history
+    '--help'|'-h') # print usage
+      echo "usage: j [<query|command>]\n"
+      echo "available commands:"
+      echo "  -h, --help           print this help and exit"
+      echo "  -p, --purge          remove all no exsiting directories from history"
+      shift;
+      ;;
+    '--purge'|'-p') # remove all not existing directories from history
       
       cdr -l | sed 's|^[^ ]* *||' | sed "s|^~|$HOME|" \
           | while read dir; do 
