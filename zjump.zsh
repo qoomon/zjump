@@ -6,14 +6,14 @@ zstyle ':chpwd:*' recent-dirs-file ${ZDOTDIR:-$HOME}/.chpwd-recent-dirs
 zstyle ':chpwd:*' recent-dirs-max 1024
 
 # check for fzf installed
-if ! type fzf >/dev/null; then
+if ! [ $commands[fzf] ]; then
   echo "[zjump]: couldn't find fzf installation" >&2
   echo "[zjump]: please install fzf in order to use zjump" >&2
 fi
 
 function zjump {
   # check for fzf installed
-  if ! type fzf >/dev/null; then
+  if ! [ $commands[fzf] ]; then
     echo "couldn't find fzf installation" >&2
     return 1
   fi
