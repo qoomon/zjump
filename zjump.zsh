@@ -46,7 +46,7 @@ function zjump {
       local pwd_list=('/' '/'${^${(s:/:)PWD%/*}})
       local pwd_index
       pwd_index=$(echo ${(F)pwd_list} | nl \
-          | fzf --tac --height 10 --reverse --no-sort --query "$dir_query" --exact --select-1 --exit-0 --with-nth=2.. \
+          | fzf --tac --height 10 --reverse --no-sort --query "$dir_query" --exact --select-1 --with-nth=2.. \
           | cut -f1)
       return_code=$status
       if [[ $return_code == 1 ]]; then
@@ -67,7 +67,7 @@ function zjump {
       dir=$(find . -mindepth 1 -type d 2>&1 \
           | grep -v 'find:.*Permission denied' \
           | sed 's|^\./\(.*\)|\1|' \
-          | fzf --tac --height 10 --reverse --query "$dir_query" --exact --select-1 --exit-0)
+          | fzf --tac --height 10 --reverse --query "$dir_query" --exact --select-1)
       return_code=$status
       if [[ $return_code == 1 ]]; then
         echo "no match" >&2
@@ -83,7 +83,7 @@ function zjump {
       
       local dir
       dir=$( cdr -l | sed 's|^[^ ]* *||' | sed 's|\\\(.\)|\1|g' | sed "s|^~|$HOME|" \
-          | fzf --height 10 --reverse --query "$dir_query" --exact --select-1 --exit-0)
+          | fzf --height 10 --reverse --query "$dir_query" --exact --select-1)
       return_code=$status
       if [[ $return_code == 1 ]]; then
         echo "no match" >&2
