@@ -28,15 +28,15 @@ function zjump {
       shift;
       ;;
     '--purge'|'-p') # remove all not existing directories from history
-      
-      cdr -l | sed 's|^[^ ]* *||' | sed "s|^~|$HOME|" \
-          | while read dir; do 
-            if [[ ! -d $dir ]]; then
-              echo "remove $dir"
-              cdr -P $dir
+      local cdr_dir
+      cdr -l | sed 's|^[^ ]* *||' \
+          | while read cdr_dir; do 
+            if [[ ! -d ${~cdr_dir} ]]; then
+              echo "remove ${cdr_dir}"
+              # (b) - escape globbing ch
+              cdr -P ${${(b)cdr_dir}/#'\~'/'~'}
             fi
           done
-      
       shift;
       ;;
       
