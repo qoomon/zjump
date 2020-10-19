@@ -34,7 +34,7 @@ antigen apply
 ### [Oh My ZSH! custom plugin](http://ohmyz.sh/)
 ```
 git clone https://github.com/qoomon/zjump $ZSH_CUSTOM/plugins/zjump
-plugins+=(k)
+plugins+=(zjump)
 ```
 ### [zplug](https://github.com/zplug/zplug)
 `zplug "qoomon/zjump"`
