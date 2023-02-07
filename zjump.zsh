@@ -17,7 +17,7 @@ function zjump {
     echo "couldn't find fzf installation" >&2
     return 1
   fi
-  
+
   local cmd="$1"
   case "$cmd" in
     '--help'|'-h') # print usage
@@ -30,7 +30,7 @@ function zjump {
     '--purge'|'-p') # remove all not existing directories from history
       local cdr_dir
       cdr -l | sed 's|^[^ ]* *||' \
-          | while read cdr_dir; do 
+          | while read cdr_dir; do
             if [[ ! -d ${~cdr_dir} ]]; then
               echo "remove ${cdr_dir}"
               # (b) - escape globbing ch
@@ -39,11 +39,11 @@ function zjump {
           done
       shift;
       ;;
-      
+
     '..') # parent directories selection
       shift;
       local dir_query=$@
-      
+
       local dir_list=(${(s:/:)PWD%/*})
       dir_list=$(for dir_index in {0..$((${#dir_list}))}; echo /${(j:/:)dir_list:0:$dir_index})
       local dir # local declaration needs a seperate line to be able to catch fzf_status
@@ -53,14 +53,14 @@ function zjump {
       if [[ $fzf_status != 0 ]]; then
         return $fzf_status
       fi
-      
+
       builtin cd $dir
       ;;
-      
+
     '.') # sub-directories selection
       shift;
       local dir_query=$@
-      
+
       local dir # local declaration needs a seperate line to be able to catch fzf_status
       dir=$(find . -mindepth 1 -type d 2>&1 \
           | grep -v 'find:.*Permission denied' \
@@ -70,22 +70,21 @@ function zjump {
       if [[ $fzf_status != 0 ]]; then
         return $fzf_status
       fi
-      
+
       builtin cd $dir
       ;;
-      
+
     *) # history directories selection
       local dir_query=$@
-      
+
       local dir # local declaration needs a seperate line to be able to catch fzf_status
-      dir=$( cdr -l | sed 's|^[^ ]* *||' | sed 's|\\\(.\)|\1|g' \
-          | sed "s|^~|$HOME|" \
+      dir=$( ls -1d --color=always $(cdr -l | sed 's|^[^ ]* *||' | sed 's|\\\(.\)|\1|g' | sed "s|^~|$HOME|") 2> /dev/null \
           | fzf --height 10 --reverse --query "$dir_query" -i --select-1)
       local fzf_status=$status
       if [[ $fzf_status != 0 ]]; then
         return $return_code
       fi
-      
+
       builtin cd $dir
       ;;
   esac
