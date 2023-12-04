@@ -79,7 +79,7 @@ function zjump {
 
       local dir # local declaration needs a seperate line to be able to catch fzf_status
       dir=$( ls -1d --color=always $(cdr -l | sed 's|^[^ ]* *||' | sed 's|\\\(.\)|\1|g' | sed "s|^~|$HOME|") 2> /dev/null \
-          | fzf --height 10 --reverse --query "$dir_query" -i --select-1)
+          | fzf --ansi --height 10 --reverse --query "$dir_query" -i --select-1)
       local fzf_status=$status
       if [[ $fzf_status != 0 ]]; then
         return $return_code
