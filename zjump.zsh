@@ -48,6 +48,7 @@ function zjump {
       dir_list=$(for dir_index in {0..$((${#dir_list}))}; echo /${(j:/:)dir_list:0:$dir_index})
       local dir # local declaration needs a seperate line to be able to catch fzf_status
       dir=$(echo ${dir_list}\
+          | tr '\n' '\0' | xargs -0 ls -f --color -d 2>/dev/null \
           | fzf --tac --height 10 --reverse --no-sort --query "$dir_query" -i --select-1)
       local fzf_status=$status
       if [[ $fzf_status != 0 ]]; then
@@ -62,9 +63,8 @@ function zjump {
       local dir_query=$@
 
       local dir # local declaration needs a seperate line to be able to catch fzf_status
-      dir=$(find . -mindepth 1 -type d 2>&1 \
-          | grep -v 'find:.*Permission denied' \
-          | sed 's|^\./\(.*\)|\1|' \
+      dir=$(find . -mindepth 1 -type d 2>&1 | sed 's/^\.\///' \
+          | tr '\n' '\0' | xargs -0 ls -f --color -d 2>/dev/null \
           | fzf --tac --height 10 --reverse --query "$dir_query" -i --select-1)
       local fzf_status=$status
       if [[ $fzf_status != 0 ]]; then
@@ -76,9 +76,11 @@ function zjump {
 
     *) # history directories selection
       local dir_query=$@
+      local sed_escaped_HOME=$(echo $HOME | sed -e 's/[]\/$*.^[]/\\&/g')
 
       local dir # local declaration needs a seperate line to be able to catch fzf_status
-      dir=$( ls -1d --color=always $(cdr -l | sed 's|^[^ ]* *||' | sed 's|\\\(.\)|\1|g' | sed "s|^~|$HOME|") 2> /dev/null \
+      dir=$(cdr -l | sed 's/^[0-9]* *//g' | sed "s/^~/$sed_escaped_HOME/" \
+          | tr '\n' '\0' | xargs -0 ls -f --color -d 2>/dev/null \
           | fzf --ansi --height 10 --reverse --query "$dir_query" -i --select-1)
       local fzf_status=$status
       if [[ $fzf_status != 0 ]]; then
