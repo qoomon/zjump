@@ -19,8 +19,6 @@
 
 ### [zgem](https://github.com/qoomon/zgem)
 `zgem bundle 'https://github.com/qoomon/zjump.git' from:'git' use:'zjump.zsh'`
-### [zplug](https://github.com/zdharma/zplugin)
-`zplug qoomon/zjump`
 ### [zgen](https://github.com/tarjoilija/zgen)
 ```
 zgen load qoomon/zjump
